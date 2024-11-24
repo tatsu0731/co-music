@@ -52,6 +52,16 @@ const CustomAudioPlayer = () => {
 
   return (
     <div className="m-2 flex flex-col items-center">
+      <div
+      className="m-2 flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url('/inferno.png')`, // 画像のパスを指定
+        minHeight: "300px", // 必要に応じて高さを設定
+        borderRadius: "16px", // デザインの調整（任意）
+        padding: "20px",
+        width: "100%",
+      }}
+    ></div>
       <audio
         ref={audioRef}
         src="/music.mp3"
