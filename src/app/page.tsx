@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabase = await createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function fetchCommentsFromSupabase() {
   const { data, error } = await supabase.from("comments").select("*");
@@ -13,20 +13,28 @@ async function fetchCommentsFromSupabase() {
     console.error(error);
     throw new Error("データの取得に失敗しました");
   }
-  console.log(data)
+  console.log(data);
+  return data;
+}
+async function fetchCommentFromSupabase() {
+  const { data, error } = await supabase.from("comments").select("*");
+  if (error) {
+    console.error(error);
+    throw new Error("データの取得に失敗しました");
+  }
+  console.log(data);
   return data;
 }
 
 export default function Home() {
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<any[]>([]); // 型を定義
 
   useEffect(() => {
     async function loadComments() {
-        const fetchComments = await fetchCommentsFromSupabase();
-        setComments(fetchComments);
+      const fetchComments = await fetchCommentsFromSupabase();
+      setComments(fetchComments);
     }
     loadComments();
-    console.log(comments)
   }, []);
 
   return (
@@ -49,19 +57,22 @@ export default function Home() {
             <div className="py-1 px-3 border-2 border-blue-300 rounded-md">
               <p>
                 ここのライブアレンジめっちゃぶち上がった！！
-                <span className=" text-blue-500">02:35</span>
+                <span className="text-blue-500">02:35</span>
               </p>
             </div>
-            <p className=" text-xs">12:00</p>
+            <p className="text-xs">12:00</p>
           </section>
           <section title="state" className="flex gap-2">
             <div className="p-2 bg-blue-200 rounded-md text-white w-10 h-10">
               ゆ
             </div>
             <div className="py-1 px-3 border-2 border-blue-300 rounded-md">
-              <p>{comments}</p>
+              {/* コメント一覧を表示 */}
+              {comments.map((comment: any) => (
+                <p key={comment.comment_id}>{comment.comment}</p>
+              ))}
             </div>
-            <p className=" text-xs">12:00</p>
+            <p className="text-xs">12:00</p>
           </section>
         </section>
         <section className="bottom-0 fixed w-full mx-4">
