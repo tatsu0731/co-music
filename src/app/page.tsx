@@ -16,18 +16,10 @@ async function fetchCommentsFromSupabase() {
   console.log(data);
   return data;
 }
-async function fetchCommentFromSupabase() {
-  const { data, error } = await supabase.from("comments").select("*");
-  if (error) {
-    console.error(error);
-    throw new Error("データの取得に失敗しました");
-  }
-  console.log(data);
-  return data;
-}
 
 export default function Home() {
   const [comments, setComments] = useState<any[]>([]); // 型を定義
+  const [replyChecked, setReplyChecked] = useState(false);
 
   useEffect(() => {
     async function loadComments() {
@@ -36,6 +28,8 @@ export default function Home() {
     }
     loadComments();
   }, []);
+
+  const flag: boolean = true
 
   return (
     <>
@@ -59,9 +53,31 @@ export default function Home() {
                 ここのライブアレンジめっちゃぶち上がった！！
                 <span className="text-blue-500">02:35</span>
               </p>
+              {!replyChecked &&
+                <div className="flex justify-end">
+                <button onClick={() => setReplyChecked(!replyChecked)} className="text-xs text-blue-400">▼ 返信あり</button>
+              </div>
+              }
             </div>
             <p className="text-xs">12:00</p>
           </section>
+          {replyChecked &&
+            <section title="reply" className="flex flex-col gap-2 ml-4">
+              <div className="flex gap-2">
+                <div className="p-2 bg-blue-100 rounded-md text-white w-8 h-8 items-center text-sm">
+                  ゆ
+                </div>
+                <div className="py-1 px-3 border-2 border-sleate-200 rounded-md">
+                  <p className="text-sm">
+                    それな！分かる！
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <button onClick={() => setReplyChecked(!replyChecked)} className="text-xs text-blue-400 mr-8">返信を隠す</button>
+              </div>
+            </section>
+          }
           <section title="state" className="flex gap-2">
             <div className="p-2 bg-blue-200 rounded-md text-white w-10 h-10">
               ゆ
