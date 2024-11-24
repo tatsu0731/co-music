@@ -32,8 +32,6 @@ const CustomAudioPlayer = () => {
       console.log(`音声の長さ: ${audio.duration}秒`);
       setDurationInSec(audio.duration);
       setIsLoaded(true);
-
-      
     };
   }, []);
 
@@ -53,7 +51,7 @@ const CustomAudioPlayer = () => {
   }, []);
 
   return (
-    <div className="m-16 flex flex-col items-center">
+    <div className="m-2 flex flex-col items-center">
       <audio
         ref={audioRef}
         src="/music.mp3"
@@ -63,10 +61,18 @@ const CustomAudioPlayer = () => {
       <div className="flex items-center">
         <button
           onClick={handlePlayPause}
-          className="p-4"
+          className="p-2 m-4 rounded-full px-3 py-3 block rounded-full shadow-md bg-[#eff0f9] p-4 cursor-pointer group [&_*]:transition-all [&_*]:duration-150 [&_*]:ease-in group-hover:bg-rose-600"
           aria-label={isPlaying ? '一時停止' : '再生'}
         >
-          {isPlaying ? '一時停止' : '再生'}
+          {isPlaying ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 ">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+            </svg>
+          )}
         </button>
       </div>
       <Seekbar
