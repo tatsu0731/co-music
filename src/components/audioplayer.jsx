@@ -56,7 +56,6 @@ const CustomAudioPlayer = () => {
         ref={audioRef}
         src="/music.mp3"
         preload="metadata"
-        autoPlay
       />
       <div className="flex items-center">
         <button
