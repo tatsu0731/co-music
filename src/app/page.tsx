@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-import CustomAudioPlayer from "../../component/audioplayer.jsx";
+import CustomAudioPlayer from "../components/audioplayer.jsx"
+
 export default function Home() {
   const [comments, setComments] = useState<any[]>([]); // 型を定義
   const [replyChecked, setReplyChecked] = useState(false);
