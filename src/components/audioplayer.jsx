@@ -60,7 +60,7 @@ const CustomAudioPlayer = () => {
       <div className="flex items-center">
         <button
           onClick={handlePlayPause}
-          className="p-2 m-4 rounded-full px-3 py-3 block rounded-full shadow-md bg-[#eff0f9] p-4 cursor-pointer group [&_*]:transition-all [&_*]:duration-150 [&_*]:ease-in group-hover:bg-rose-600"
+          className="p-2 m-4 rounded-full block rounded-full shadow-md bg-[#eff0f9] p-4 cursor-pointer group [&_*]:transition-all [&_*]:duration-150 [&_*]:ease-in group-hover:bg-rose-600 mb-16"
           aria-label={isPlaying ? '一時停止' : '再生'}
         >
           {isPlaying ? (
