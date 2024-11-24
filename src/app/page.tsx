@@ -8,7 +8,7 @@ import CustomAudioPlayer from "../../component/audioplayer.jsx";
 export default function Home() {
   const [comments, setComments] = useState<any[]>([]); // 型を定義
   const [replyChecked, setReplyChecked] = useState(false);
-  async function Comments() {
+  async function get_comments() {
     const supabase = await createClient(supabaseUrl, supabaseKey);
     const { data: comments } = await supabase.from("comments").select(`
       *,
