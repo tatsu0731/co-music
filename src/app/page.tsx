@@ -46,7 +46,10 @@ export default function Home() {
         </div>
       </header>
       <section title="sec-music" className="flex justify-center mb-4">
-        <div className="w-80 bg-slate-300 h-52 rounded-md text-white">再生</div>
+        <audio controls>
+          <source src="/music.mp3" type="audio/mpeg" />
+          お使いのブラウザはaudioタグをサポートしていません。
+        </audio>
       </section>
       <div className="grid items-center justify-items-center gap-16 mx-2">
         <section className="flex flex-col gap-y-4">
