@@ -8,6 +8,7 @@ import CustomAudioPlayer from "../../component/audioplayer.jsx";
 export default function Home() {
   const [comments, setComments] = useState<any[]>([]); // 型を定義
   const [replyChecked, setReplyChecked] = useState(false);
+  //コメントを取得する関数(返信コメントも取得)
   async function get_comments() {
     const supabase = await createClient(supabaseUrl, supabaseKey);
     const { data: comments } = await supabase.from("comments").select(`
@@ -20,9 +21,23 @@ export default function Home() {
 
     return <pre>{JSON.stringify(comments, null, 2)}</pre>;
   }
-
+  //コメントを登録する関数
+  //引数に登録したいコメントを指定(string)
+  //成功時はtrue,それ以外はfalseが返る
+  async function post_comment(comment: string) {
+    const supabase = await createClient(supabaseUrl, supabaseKey);
+    try {
+      const { data: comments } = await supabase
+        .from("comments")
+        .insert([{ comment: comment }])
+        .select();
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+    return true;
+  }
   const flag: boolean = true;
-
   return (
     <>
       <header className="flex py-1 px-2 gap-2 my-2">
